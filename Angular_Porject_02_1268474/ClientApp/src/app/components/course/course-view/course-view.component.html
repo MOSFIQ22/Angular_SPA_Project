@@ -1,0 +1,68 @@
+<mat-card class="mat-elevation-z10">
+    <mat-card-header>
+        
+           <img mat-card-avatar src="../../../../assets/school_FILL0_wght400_GRAD0_opsz48.svg"/>
+        
+        <mat-card-title>Courses</mat-card-title>
+        <mat-card-subtitle>List of Courses</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="right">
+            <a mat-mini-fab [routerLink]="['/course-create']">
+                <mat-icon>add</mat-icon>
+            </a>
+        </div>
+        <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="batchName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Batch Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.batchName}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="courseName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.courseName}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="courseDesc">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Course Desc</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.courseDesc}}</mat-cell>
+
+            </ng-container>
+          
+            <ng-container matColumnDef="courseDuration">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Course Duration</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.courseDuration}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="startDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.startDate|date:'yyyy-MM-dd'}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="endDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.endDate|date:'yyyy-MM-dd'}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="available">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Available</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.available}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>...</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <a [routerLink]="['/course-edit', element.courseID]"><mat-icon>edit</mat-icon></a>
+                    <button [disabled]="!element.canDelete" mat-icon-button (click)="confirmDelete(element)"><mat-icon>delete</mat-icon></button>                </mat-cell>
+
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+    
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 40]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button [routerLink]="['/courses']">Back to List</a>
+    </mat-card-actions>
+</mat-card>

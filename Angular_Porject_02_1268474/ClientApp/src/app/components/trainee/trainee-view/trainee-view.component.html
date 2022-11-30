@@ -1,0 +1,73 @@
+<mat-card class="mat-elevation-z3">
+    <mat-card-header>
+        
+           <img mat-card-avatar src="../../../../assets/groups_FILL0_wght400_GRAD0_opsz48.svg"/>
+        
+        <mat-card-title>Trainees</mat-card-title>
+        <mat-card-subtitle>List of Trainees</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="right">
+            <a mat-mini-fab [routerLink]="['/trainee-create']">
+                <mat-icon>add</mat-icon>
+            </a>
+        </div>
+     <mat-table [dataSource]="dataSource" matSort>
+       
+            <ng-container matColumnDef="picture">
+                <mat-header-cell *matHeaderCellDef >
+                    
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"><img class="circle-img" src="{{picPath}}/{{element.picture}}" style="width: 40px;" /></mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="courseName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.courseName}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="traineeName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Trainee Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.traineeName}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="traineeAddress">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Trainee Address</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.traineeAddress}}</mat-cell>
+
+            </ng-container>
+            
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="birthDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Birth-Date</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.birthDate|date:'yyyy-MM-dd'}}</mat-cell>
+
+            </ng-container>
+            
+            <ng-container matColumnDef="isRunning">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Is-Running</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.isRunning ? 'True': 'False'}}</mat-cell>
+
+            </ng-container>
+           
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>...</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <a [routerLink]="['/trainee-edit', element.traineeID]"><mat-icon>edit</mat-icon></a>
+                    <button [disabled]="!element.canDelete" mat-icon-button (click)="confirmDelete(element)"><mat-icon>delete</mat-icon></button>
+                </mat-cell>
+
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+    
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 40]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+</mat-card>
+

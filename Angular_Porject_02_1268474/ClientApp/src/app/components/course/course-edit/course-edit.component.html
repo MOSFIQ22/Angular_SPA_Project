@@ -1,0 +1,67 @@
+<mat-card class="mat-elevation-z3">
+    <mat-card-header>
+
+        <img mat-card-avatar src="../../../../assets/school_FILL0_wght400_GRAD0_opsz48.svg"/>
+
+        <mat-card-title>Edit Course</mat-card-title>
+        <mat-card-subtitle>Edit new Course entry</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+        <form [formGroup]="courseForm" class="form-container" (ngSubmit)="save()">
+            <mat-form-field appearance="fill" class="f-w">
+                <mat-label>Batch Name</mat-label>
+                <input matInput formControlName="batchName">
+                <mat-error *ngIf="courseForm.controls['batchName'].hasError('required')"><strong>BatchName</strong> required</mat-error>
+                <mat-error *ngIf="courseForm.controls['batchName'].hasError('maxlength')"><strong>BatchName</strong> 30 chars max</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="f-w">
+                <mat-label>Course Name</mat-label>
+                <input matInput formControlName="courseName">
+                <mat-error *ngIf="courseForm.controls['courseName'].hasError('required')"><strong>CourseName</strong> required</mat-error>
+               <mat-error *ngIf="courseForm.controls['courseName'].hasError('maxlength')"><strong>CourseName</strong> 40 chars max</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="f-w">
+                <mat-label>Course Desc</mat-label>
+                <textarea matInput formControlName="courseDesc"></textarea>
+                <mat-error *ngIf="courseForm.controls['courseDesc'].hasError('required')"><strong>Course Desc</strong> required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="f-w">
+                <mat-label>Course Duration</mat-label>
+                <input matInput formControlName="courseDuration">
+                <mat-error *ngIf="courseForm.controls['courseDuration'].hasError('required')"><strong>CourseDuration</strong> required</mat-error>
+                <mat-error *ngIf="courseForm.controls['courseDuration'].hasError('maxlength')"><strong>CourseDuration</strong> 30 chars max</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="f-w">
+                <mat-label>Start-Date</mat-label>
+                <input matInput [matDatepicker]="picker"  formControlName="startDate"/>
+                <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="courseForm.controls['startDate'].hasError('required')"><strong>Start-Date</strong>
+                    required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="f-w">
+                <mat-label>End-Date</mat-label>
+                <input matInput [matDatepicker]="picker1"  formControlName="endDate" />
+                <mat-datepicker-toggle matSuffix  [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error *ngIf="courseForm.controls['endDate'].hasError('required')"><strong>End-Date</strong>
+                    required</mat-error>
+            </mat-form-field>
+
+            <div class="f-w mb-1">
+                <mat-checkbox formControlName="available" class="c-m" >Available</mat-checkbox>
+            </div>
+
+            <div class="f-w">
+               <button type="submit" mat-raised-button color="primary" [disabled]="courseForm.invalid">Save</button>
+            </div>
+            
+        </form>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button [routerLink]="['/courses']">Back to list</a>
+    </mat-card-actions>
+</mat-card>
+
